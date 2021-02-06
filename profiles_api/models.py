@@ -9,10 +9,11 @@ from django.contrib.auth.models import BaseUserManager
 class UserProfileManager(BaseUserManager):
     """ manager for user profile """
     
-    def create_user(self,email,name,password=None):
+    def create_user(self, email, name, password=None):
         """create a new user profile """
         if not email:
             raise ValueError('user must have an email address')
+       
         email = self.normalize_email(email)
         user = self.model(email=email , name=name)
 
@@ -42,7 +43,7 @@ class UserProfile(AbstractBaseUser,PermissionsMixin):
     objects = UserProfileManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELD = ['name']
+    REQUIRED_FIELDS = ['name']
 
     def get_full_name(self):
         """retrive full name of user """
@@ -51,6 +52,7 @@ class UserProfile(AbstractBaseUser,PermissionsMixin):
     def get_short_name(self):
         """retrivbe the short name of the user """
         return self.name
+
     def __str__(self):
         return self.email
 
