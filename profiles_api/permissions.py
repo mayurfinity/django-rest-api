@@ -1,3 +1,4 @@
+
 from rest_framework import permissions
 
 class UpdateOwnProfile(permissions.BasePermission):
@@ -9,3 +10,4 @@ class UpdateOwnProfile(permissions.BasePermission):
             return True
         
         return obj.id == request.user.id
+        
